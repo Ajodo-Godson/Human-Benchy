@@ -1,4 +1,5 @@
 import React from 'react'
+import '../styles/GameBoard.css'
 
 export default function GameBoard({ level, litCells, userClicks, gameState, onCellClick }) {
     const renderGrid = () => {
@@ -14,14 +15,11 @@ export default function GameBoard({ level, litCells, userClicks, gameState, onCe
                     key={i}
                     onClick={() => onCellClick(i)}
                     className={`
-            aspect-square border-2 border-gray-300 rounded-md
-            transition-colors duration-200
-            hover:bg-gray-100
-            ${isLit ? 'bg-blue-500 border-blue-600' : ''}
-            ${isCorrect ? 'bg-green-500 border-green-600' : ''}
-            ${isIncorrect ? 'bg-red-500 border-red-600' : ''}
-            ${!isLit && !isClicked ? 'bg-white' : ''}
-          `}
+                        grid-cell
+                        ${isLit ? 'lit' : ''}
+                        ${isCorrect ? 'correct' : ''}
+                        ${isIncorrect ? 'incorrect' : ''}
+                    `}
                     aria-label={`Grid cell ${i + 1}`}
                 />
             )
@@ -30,9 +28,9 @@ export default function GameBoard({ level, litCells, userClicks, gameState, onCe
     }
 
     return (
-        <div className="flex justify-center items-center w-full my-8">
+        <div className="game-board">
             <div
-                className="grid gap-2 p-4 bg-gray-50 rounded-xl shadow-inner"
+                className="grid-container"
                 style={{
                     gridTemplateColumns: `repeat(${level}, minmax(0, 1fr))`,
                     width: `${Math.min(400, level * 60)}px`

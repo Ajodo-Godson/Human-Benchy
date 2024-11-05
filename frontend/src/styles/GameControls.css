@@ -1,0 +1,34 @@
+.game-controls {
+    display: flex;
+    justify-content: center;
+}
+
+.control-button {
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.control-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+.control-button.next {
+    background-color: #10b981;
+    color: white;
+}
+
+.control-button.next:hover {
+    background-color: #059669;
+}
+
+.control-button.start {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.control-button.start:hover {
+    background-color: #2563eb;
+}

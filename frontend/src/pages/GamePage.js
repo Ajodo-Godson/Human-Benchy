@@ -4,7 +4,7 @@ import GameControls from '../components/GameControls'
 import ScoreDisplay from '../components/ScoreDisplay'
 
 const INITIAL_LEVEL = 3
-const SHOW_DURATION = 1000
+const SHOW_DURATION = 1000 // milliseconds
 
 export default function GamePage() {
     const [level, setLevel] = useState(INITIAL_LEVEL)
@@ -30,6 +30,7 @@ export default function GamePage() {
         const newLitCells = generateLitCells()
         setLitCells(newLitCells)
         setUserClicks([])
+        setFailures(0)
         setGameState('showing')
         setStartTime(Date.now())
 
@@ -49,7 +50,7 @@ export default function GamePage() {
         setUserClicks(newUserClicks)
 
         if (!litCells.includes(index)) {
-            setFailures(failures + 1)
+            setFailures((prev) => prev + 1)
         }
 
         if (newUserClicks.length === litCells.length) {
@@ -59,7 +60,7 @@ export default function GamePage() {
     }
 
     const handleNextLevel = () => {
-        setLevel(level + 1)
+        setLevel((prev) => prev + 1)
         setGameState('idle')
     }
 
@@ -70,29 +71,27 @@ export default function GamePage() {
     }, [gameState, startGame])
 
     return (
-        <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
-            <div className="p-6">
-                <h1 className="text-3xl font-bold text-center mb-8">Memory Test Game</h1>
-                <GameBoard
-                    level={level}
-                    litCells={litCells}
-                    userClicks={userClicks}
-                    gameState={gameState}
-                    onCellClick={handleCellClick}
-                />
-                <ScoreDisplay
-                    level={level}
-                    failures={failures}
-                    gameState={gameState}
-                    startTime={startTime}
-                    endTime={endTime}
-                />
-                <GameControls
-                    gameState={gameState}
-                    onStartGame={startGame}
-                    onNextLevel={handleNextLevel}
-                />
-            </div>
+        <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden p-6">
+            <h1 className="text-3xl font-bold text-center mb-8">Memory Test Game</h1>
+            <GameBoard
+                level={level}
+                litCells={litCells}
+                userClicks={userClicks}
+                gameState={gameState}
+                onCellClick={handleCellClick}
+            />
+            <ScoreDisplay
+                level={level}
+                failures={failures}
+                gameState={gameState}
+                startTime={startTime}
+                endTime={endTime}
+            />
+            <GameControls
+                gameState={gameState}
+                onStartGame={startGame}
+                onNextLevel={handleNextLevel}
+            />
         </div>
     )
 }
