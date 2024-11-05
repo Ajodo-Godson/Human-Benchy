@@ -4,7 +4,6 @@ import GameControls from '../components/GameControls'
 import ScoreDisplay from '../components/ScoreDisplay'
 
 const INITIAL_LEVEL = 3
-const SHOW_DURATION = 1000 // milliseconds
 const MAX_TRIALS = 5 // Need to think of a logic to set this value
 const MIN_TRIALS = 2
 
@@ -20,7 +19,6 @@ export default function GamePage() {
     const [successCount, setSuccessCount] = useState(0)
     const [trialsForLevel, setTrialsForLevel] = useState(MAX_TRIALS)
 
-    //Will refine this function later. Missing logic to set the max trials and genratign the num lit cells
     const generateLitCells = useCallback(() => {
         const maxLitCells = Math.floor((1 / 2) * level * level)
         const numLitCells = Math.max(level, Math.floor(Math.random() * (maxLitCells + 1)))
@@ -59,19 +57,17 @@ export default function GamePage() {
         setUserClicks([])
         setFailures(0)
         setGameState('showing')
-        setStartTime(Date.now())
-
-        setTimeout(() => {
-            setGameState('guessing')
-        }, SHOW_DURATION)
+        setStartTime(0)
+        setEndTime(0)
     }, [generateLitCells])
 
     const handleCellClick = (index) => {
-        if (gameState !== 'guessing') return
-
-        if (userClicks.length === 0) {
+        if (gameState === 'showing') {
+            setGameState('guessing')
             setStartTime(Date.now())
         }
+
+        if (gameState !== 'guessing') return
 
         const newUserClicks = [...userClicks, index]
         setUserClicks(newUserClicks)
