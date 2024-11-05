@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useState, useEffect, useCallback } from 'react'
 import GameBoard from '../components/GameBoard'
 import GameControls from '../components/GameControls'
