@@ -1,7 +1,7 @@
 
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}", // Adjust this path to where your files are located
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {},
