@@ -21,7 +21,7 @@ export default function GamePage() {
 
     const generateLitCells = useCallback(() => {
         const maxLitCells = Math.floor((1 / 2) * level * level)
-        const numLitCells = Math.max(level, Math.floor(Math.random() * (maxLitCells + 1)))
+        const numLitCells = Math.max(level, Math.floor(window.crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1) * (maxLitCells + 1)))
         const cells = []
 
         while (cells.length < numLitCells) {
