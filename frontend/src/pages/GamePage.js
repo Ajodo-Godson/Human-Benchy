@@ -25,7 +25,7 @@ export default function GamePage() {
         const cells = []
 
         while (cells.length < numLitCells) {
-            const cell = Math.floor(Math.random() * (level * level))
+            const cell = Math.floor(crypto.getRandomValues(new Uint32Array(1))[0] / (0xFFFFFFFF + 1) * (level * level))
             if (!cells.includes(cell)) {
                 cells.push(cell)
             }
